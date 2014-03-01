@@ -1,6 +1,7 @@
 # Django settings for inspections project.
 
 import os
+import getpass
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,16 +12,26 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'rlau+inspections',
-        'OPTIONS': {
-            'read_default_file' : os.path.expanduser('~/.my.cnf'),
-        },
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+if getpass.getuser() != 'Ryan':   # for production
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'rlau+inspections',
+            'OPTIONS': {
+                'read_default_file' : os.path.expanduser('~/.my.cnf'),
+            },
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
     }
-}
+else:
+    DATABASES = {   # for development
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'inspections',
+            'USER': 'root',
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
@@ -122,11 +133,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'inspectionapp',
 )
 
 # A sample logging configuration. The only tangible logging
