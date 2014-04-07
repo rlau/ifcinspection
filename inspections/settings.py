@@ -81,6 +81,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
+    '/User/Ryan/Desktop/PSK/JudComm/ifcinspection/inspectionapp/static',
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -139,6 +140,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'inspectionapp',
+    'south',
 )
 
 # A sample logging configuration. The only tangible logging
