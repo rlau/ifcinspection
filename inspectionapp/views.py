@@ -2,27 +2,41 @@ from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
+import os
 
 def index(request):
 	# main inspection form page
 	if not request.user.is_authenticated():
 		return redirect(loginpage)
 	else:
-		return render(request, 'inspectionapp/inspectionform.html', {})
+		houses = []
+		name = request.user.house.name
+		houses.append(request.user.house.abbreviation)
+		houses.append(request.user.house.house1)
+		houses.append(request.user.house.house2)
+		return render(request, 'inspectionapp/inspectionform.html', {'houses':houses, 'name':name})
 def loginpage(request):
 	return render(request, 'inspectionapp/login.html', {})
 
 def submit(request):
-	# submits form to server.  if no alcohol, goes to thank you page
-	# if alcohol, requests email
-	return HttpResponse('test1')
+	house = request.user.house
+	if request.method =='POST':
+		date = request.POST['inspectionDate']
+		house_inspected = request.POST['houseinspected']
+		alcohol_found = request.POST['alcoholfound']
+		if alcohol_found == 'yes':
+			os.system("php emailform.php 'rlau@mit.edu' 'rlau@mit.edu' 'alcohol' 'subject'")
+			return HttpResponse('Please email rlau@mit.edu with report and details')
+		else:
+			return HttpResponse('Alcohol not found')
+	else:
+		return HttpResponse('Something went wrong')
 
 def review(request):
 	# to be implemented
 	return HttpResponse('review')
 
 def user_login(request):
-	print 'here'
 	context = RequestContext(request)
 	if request.method == 'POST':
 		username = request.POST['username']
