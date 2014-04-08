@@ -25,7 +25,7 @@ def submit(request):
 		house_inspected = request.POST['houseinspected']
 		alcohol_found = request.POST['alcoholfound']
 		if alcohol_found == 'yes':
-			os.system("php emailform.php 'rlau@mit.edu' 'rlau@mit.edu' 'alcohol' 'subject'")
+			os.system("php emailform.php rlau@mit.edu alcohol subject rlau@mit.edu")
 			return HttpResponse('Please email rlau@mit.edu with report and details')
 		else:
 			return HttpResponse('Alcohol not found')

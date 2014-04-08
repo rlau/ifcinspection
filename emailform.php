@@ -5,7 +5,7 @@ $message = $arguments[2];
 $subject = $arguments[3];
 $from = $arguments[4];
 
-$headers = 'From: {$from}' . "\r\n" .
+$header = 'From: {$from}' . "\r\n" .
 	'Reply-To: {$from}' . "\r\n";
 mail($to, $subject, $message, $header);
 
