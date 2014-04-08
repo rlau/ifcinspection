@@ -1,11 +1,13 @@
 <?php
-
 $arguments = $argv;
-$to = $arguments[0];
-$message = $arguments[1];
-$subject = $arguments[2];
+$to = $arguments[1];
+$message = $arguments[2];
+$subject = $arguments[3];
+$from = $arguments[4];
 
-mail($to, $subject, $message);
+$headers = 'From: {$from}' . "\r\n" .
+	'Reply-To: {$from}' . "\r\n";
+mail($to, $subject, $message, $header);
 
 ?>
 
