@@ -23,6 +23,9 @@ if getpass.getuser() != 'Ryan':   # for production
             'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         }
     }
+    STATICFILES_DIRS = (
+        '/afs/athena.mit.edu/user/r/l/rlau/scripts/django/inspections/inspectionapp/static',
+    )
 else:
     DATABASES = {   # for development
         'default': {
@@ -32,6 +35,9 @@ else:
             'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
         }
     }
+    STATICFILES_DIRS = (
+        '/User/Ryan/Desktop/PSK/JudComm/ifcinspection/inspectionapp/static',
+    )
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
@@ -80,12 +86,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (
-    '/User/Ryan/Desktop/PSK/JudComm/ifcinspection/inspectionapp/static',
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
+
 
 # List of finder classes that know how to find static files in
 # various locations.

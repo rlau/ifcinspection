@@ -5,7 +5,7 @@
 <div class="container">
 	<h3> Login </h3>
 
-	<form id="login_form" method="post" action="/loginauth">
+	<form id="login_form" method="post" action="inspections/loginauth">
 		{% csrf_token %}
 		<div class="form-group row">
 			Username: <input type="text" name="username" value="" size="50" />

@@ -2,7 +2,9 @@ from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
+from datetime import date, time, timedelta
 import os
+from inspectionapp.models import Inspection, House
 
 def index(request):
 	# main inspection form page
@@ -21,14 +23,19 @@ def loginpage(request):
 def submit(request):
 	house = request.user.house
 	if request.method =='POST':
-		date = request.POST['inspectionDate']
+		date1 = request.POST['inspectionDate']
 		house_inspected = request.POST['houseinspected']
 		alcohol_found = request.POST['alcoholfound']
+		date_list = date1.split('/')
+		date1 = date(int(date_list[2]), int(date_list[0]), int(date_list[1]))
 		if alcohol_found == 'yes':
-			os.system("php emailform.php rlau@mit.edu alcohol subject rlau@mit.edu")
+			i = Inspection(house=house, date=date1, success=False, submit_by=request.user)
+			i.save()
 			return HttpResponse('Please email rlau@mit.edu with report and details')
 		else:
-			return HttpResponse('Alcohol not found')
+			i = Inspection(house=house, date=date1, success=True, submit_by=request.user)
+			i.save()
+			return HttpResponse('Thanks for submitting!')
 	else:
 		return HttpResponse('Something went wrong')
 
