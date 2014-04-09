@@ -54,7 +54,7 @@ def user_login(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect('/')
+				return HttpResponseRedirect('/inspections')
 			else:
 				return HttpResponse('Invalid login')
 	else:

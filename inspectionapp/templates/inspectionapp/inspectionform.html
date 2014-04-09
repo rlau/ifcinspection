@@ -3,7 +3,7 @@
 {% block content %}
 	<h3>You are logged in as {{name}}</h3>
 	<div class="container">
-		<form role="form" method="post" id="inspection" action="inspections/submit">
+		<form role="form" method="post" id="inspection" action="submit">
 			{% csrf_token %}
 			<div class="form-group row">
 				<div class="span3 col-md-3" id="datePicker">
