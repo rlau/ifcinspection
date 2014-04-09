@@ -24,7 +24,7 @@ if getpass.getuser() != 'Ryan':   # for production
         }
     }
     STATICFILES_DIRS = (
-        '/afs/athena.mit.edu/user/r/l/rlau/scripts/django/inspections/inspectionapp/static',
+        '/afs/athena.mit.edu/user/r/l/rlau/Scripts/django/inspections/inspectionapp/static',
     )
 else:
     DATABASES = {   # for development
